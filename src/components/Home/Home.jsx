@@ -3,12 +3,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import style from './Home.css';
+
 export default class Home extends React.Component {
   render() {
     return (
-    	<div>
+    	<div className={style.root}>
     		Home
-    		<Link to="/abc">ABc</Link>
+    		<Link to="/about">Go to About</Link>
     	</div>
     );
   }

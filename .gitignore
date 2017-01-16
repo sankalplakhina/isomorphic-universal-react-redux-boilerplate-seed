@@ -38,6 +38,7 @@ jspm_packages
 
 # WebPack
 webpack-assets.json
+webpack-stats.json
 
 # Build folder
-public
+public/assets

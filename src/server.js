@@ -4,6 +4,7 @@ import express from 'express';
 import http from 'http';
 import httpProxy from 'http-proxy';
 import compression from 'compression';
+import favicon from 'serve-favicon';
 import path from 'path';
 import PrettyError from 'pretty-error';
 import React from 'react';
@@ -14,9 +15,9 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 import {
   createStore,
-} from '../src/redux/createStore';
+} from '../src/store/createStore';
 import getRoutes from '../src/routes';
-import Default from '../src/layouts/Default';
+import Default from '../src/Default';
 import { port, apiHost, apiPort } from '../config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;
@@ -31,9 +32,11 @@ const proxy = httpProxy.createProxyServer({
 global.__CLIENT__ = false; // eslint-disable-line
 
 app.use(compression());
+app.use(favicon(path.join(__dirname, '..', '/public/static', 'favicon.ico')));
 
 app.use('/', express.static(path.resolve(__dirname, '../public')));
 
+// Proxy to API server
 app.use('/api', (req, res) => {
   proxy.web(req, res, { target: `${targetUrl}/api` });
 });

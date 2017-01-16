@@ -4,7 +4,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
-import { webpackHost, webpackPort } from '../../config/env';
 
 export default class Default extends React.Component {
   render() {
@@ -26,7 +25,7 @@ export default class Default extends React.Component {
           {/* development */}
           {
             Object.keys(assets.styles).length === 0 ?
-              <style dangerouslySetInnerHTML={{ __html: require('../containers/App.css')._style }} /> :
+              <style dangerouslySetInnerHTML={{ __html: require('../src/components/App/App.css')._style }} /> :
             null
           }
         </head>

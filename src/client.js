@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { createStore } from './redux/createStore';
+import { createStore } from './store/createStore';
 import getRoutes from './routes';
 
 const dest = global.document.getElementById('root');
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (__DEVTOOLS__ && !global.devToolsExtension) {
-  const DevTools = require('./containers/DevTools'); // eslint-disable-line
+  const DevTools = require('./DevTools'); // eslint-disable-line
 
   ReactDOM.render(
     <Provider store={store} key="provider">
