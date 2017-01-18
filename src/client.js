@@ -34,7 +34,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (__DEVTOOLS__ && !global.devToolsExtension) {
-  const DevTools = require('./DevTools'); // eslint-disable-line
+  const DevTools = require('./components/devTools');
 
   ReactDOM.render(
     <Provider store={store} key="provider">

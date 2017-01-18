@@ -3,15 +3,17 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import style from './About.css';
+import style from '../home.css';
 
-export default class About extends React.Component {
+class Home extends React.Component {
   render() {
     return (
     	<div className={style.root}>
-    		About
-    		<Link to="/">Go to Home</Link>
+    		Home
+    		<Link to="/about">Go to About</Link>
     	</div>
     );
   }
 }
+
+export default Home;

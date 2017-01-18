@@ -14,7 +14,7 @@ function createStoreWithReducer(history, data, reducer) {
   let finalCreateStore;
   if (process.env.NODE_ENV === 'development' && __CLIENT__ && __DEVTOOLS__) {
     const { persistState } = require('redux-devtools');
-    const DevTools = require('../DevTools');
+    const DevTools = require('../components/devTools');
 
     finalCreateStore = compose(
       applyMiddleware(...middleware),

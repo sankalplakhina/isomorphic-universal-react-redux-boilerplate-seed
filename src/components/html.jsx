@@ -1,11 +1,8 @@
-/* eslint react/prefer-stateless-function: 0, react/no-danger: 0, react/forbid-prop-types: 0 */
-/* eslint no-underscore-dangle: 0, global-require: 0 */
-
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
 
-export default class Default extends React.Component {
+class Html extends React.Component {
   render() {
     const { assets, component, store } = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
@@ -25,7 +22,7 @@ export default class Default extends React.Component {
           {/* development */}
           {
             Object.keys(assets.styles).length === 0 ?
-              <style dangerouslySetInnerHTML={{ __html: require('../src/components/App/App.css')._style }} /> :
+              <style dangerouslySetInnerHTML={{ __html: require('./appContainer/appContainer.css')._style }} /> :
             null
           }
         </head>
@@ -44,8 +41,10 @@ export default class Default extends React.Component {
   }
 }
 
-Default.propTypes = {
+Html.propTypes = {
   assets: React.PropTypes.object,
   component: React.PropTypes.node,
   store: React.PropTypes.object,
 };
+
+export default Html;

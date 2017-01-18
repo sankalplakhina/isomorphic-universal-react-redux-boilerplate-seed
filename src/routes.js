@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import App from './components/App/App';
-import Home from './components/Home/Home';
-import About from './components/About/About';
-import NotFound from './components/NotFound/NotFound';
+import AppContainer from './components/appContainer/appContainer';
+import Home from './components/pages/home/containers/home';
+import About from './components/pages/about/containers/about';
+import NotFound from './components/pages/notFound/components/notFound';
 
-export default (store) => { // eslint-disable-line
+export default (store) => {
 
-  // TODO:  Following approach could be used in case we need
+  // TODO:  Following approach to be used in case we need
   // to handle routes requiring login
 
   // const requireLogin = (nextState, replace, cb) => {
@@ -29,14 +29,12 @@ export default (store) => { // eslint-disable-line
   //   }
   // };
 
-  return (
-    <Route path="/" component={App}>
-      { /* Home (main) route */ }
+    return (
+    <Route path="/" component={AppContainer}>
       <IndexRoute component={Home} />
+      <Route path="home" component={Home}/>
       <Route path="about" component={About}/>
-
-      { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
     </Route>
-  );
+    );
 };

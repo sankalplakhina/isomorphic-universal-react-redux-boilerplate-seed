@@ -17,7 +17,7 @@ import {
   createStore,
 } from '../src/store/createStore';
 import getRoutes from '../src/routes';
-import Default from '../src/Default';
+import Html from '../src/components/html';
 import { port, apiHost, apiPort } from '../config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;
@@ -69,7 +69,7 @@ app.use((req, res) => {
   const history = syncHistoryWithStore(memoryHistory, store);
 
   function hydrateOnClient() {
-    res.send(`<!doctype html>${ReactDOM.renderToString(<Default assets={webpackIsomorphicTools.assets()} store={store} />)}`);
+    res.send(`<!doctype html>${ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store} />)}`);
   }
 
   match({ history, routes: getRoutes(store), location: req.originalUrl },
@@ -91,7 +91,7 @@ app.use((req, res) => {
 
       global.navigator = { userAgent: req.headers['user-agent'] };
 
-      res.send(`<!doctype html>${ReactDOM.renderToStaticMarkup(<Default assets={webpackIsomorphicTools.assets()} component={component} store={store} />)}`);
+      res.send(`<!doctype html>${ReactDOM.renderToStaticMarkup(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store} />)}`);
     } else {
       res.status(404).send('Not found');
     }
