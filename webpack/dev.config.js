@@ -75,6 +75,11 @@ module.exports = {
       'node_modules',
       'src',
     ],
+    modules: [
+      './',
+      'node_modules',
+      'src'
+    ],
     extensions: ['', '.json', '.js', '.jsx'],
   },
   plugins: [

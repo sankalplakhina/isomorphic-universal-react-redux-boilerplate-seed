@@ -6,14 +6,25 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createStore } from './store/createStore';
+import ApiClient from '../src/helpers/ApiClient';
+import { ReduxAsyncConnect } from 'redux-connect';
 import getRoutes from './routes';
 
+const client = new ApiClient();
 const dest = global.document.getElementById('root');
-const store = createStore(browserHistory, global.__data);
+const store = createStore(client, browserHistory, global.__data);
 const history = syncHistoryWithStore(browserHistory, store);
 
 const component = (
-  <Router history={history}>
+  <Router history={history} render={
+      (props) =>
+        <ReduxAsyncConnect
+          {...props}
+          helpers={{ client }}
+          filter={item => !item.deferred}
+        />
+      }
+    >
     {getRoutes(store)}
   </Router>
 );

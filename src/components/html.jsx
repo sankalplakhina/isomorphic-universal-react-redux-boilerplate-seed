@@ -24,9 +24,6 @@ class Html extends React.Component {
                     {head.base.toComponent()}
                     {head.title.toComponent()}
                     {head.meta.toComponent()}
-                    {head.link.toComponent()}
-                    {head.script.toComponent()}
-                    {/*<title>Hello, world!</title>*/}
                     {
                         /* production styles */
                         Object.keys(assets.styles).map((style, key) =>
