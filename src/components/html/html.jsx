@@ -38,7 +38,7 @@ class Html extends React.Component {
                     {
                         /* development styles */
                         Object.keys(assets.styles).length === 0 ?
-                        <style dangerouslySetInnerHTML={{ __html: require('./appContainer/appContainer.css')._style }} />
+                        <style dangerouslySetInnerHTML={{ __html: require('../appContainer/styles/appContainer.less')._style }} />
                         : null
                     }
                 </head>

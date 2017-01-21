@@ -20,7 +20,7 @@ import { createStore } from '../src/store/createStore';
 import ApiClient from '../src/helpers/ApiClient';
 
 import getRoutes from '../src/routes';
-import Html from '../src/components/html';
+import Html from '../src/components/html/html';
 import { port, apiHost, apiPort } from '../config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;

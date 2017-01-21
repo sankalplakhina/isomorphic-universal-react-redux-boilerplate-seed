@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './appContainer.css';
+import { app } from './styles/appContainer.less';
 
 class AppContainer extends React.Component {
   render() {
     return (
-    	<div className={styles.app}>
+    	<div className={app}>
     		{this.props.children}
     	</div>
     );
