@@ -36,6 +36,10 @@ module.exports = {
         loader: 'babel',
       },
       {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2&sourceMap!less-loader')
+      },
+      {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(
                   'style',

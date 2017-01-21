@@ -37,6 +37,10 @@ module.exports = {
         loader: 'babel',
       },
       {
+        test: /\.less$/,
+        loader: 'style!css?importLoaders=2&sourceMap&localIdentName=[local]__[hash:base64:5]!less-loader'
+      },
+      {
         test: /\.css$/,
         loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss',
       },
@@ -74,11 +78,6 @@ module.exports = {
     modulesDirectories: [
       'node_modules',
       'src',
-    ],
-    modules: [
-      './',
-      'node_modules',
-      'src'
     ],
     extensions: ['', '.json', '.js', '.jsx'],
   },
