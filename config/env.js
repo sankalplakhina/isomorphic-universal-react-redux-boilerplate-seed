@@ -6,4 +6,6 @@ module.exports = {
 
   webpackHost: 'localhost',
   webpackPort: 3002,
+
+  reduxDevTools: false,
 };

@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 const assetsPath = path.resolve(__dirname, '../public/assets');
 
-const { webpackHost, webpackPort } = require('../config/env');
+const { webpackHost, webpackPort, reduxDevTools } = require('../config/env');
 
 const webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -88,7 +88,7 @@ module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
     new webpack.DefinePlugin({
       __CLIENT__: true,
-      __DEVTOOLS__: true,
+      __DEVTOOLS__: reduxDevTools,
       'process.env': {
         NODE_ENV: '"development"',
       },
