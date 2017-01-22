@@ -1,5 +1,4 @@
 /* eslint no-console: 0, react/jsx-filename-extension: 0 */
-
 import express from 'express';
 import http from 'http';
 import httpProxy from 'http-proxy';
@@ -35,7 +34,6 @@ const proxy = httpProxy.createProxyServer({
 global.__CLIENT__ = false; // eslint-disable-line
 
 app.use(compression());
-app.use(favicon(path.join(__dirname, '..', '/public/static', 'favicon.ico')));
 
 // Proxy to API server
 app.use('/api', (req, res) => {
@@ -56,6 +54,44 @@ proxy.on('error', (error, req, res) => {
     }
     const json = { error: 'proxy_error', reason: error.message };
     res.end(JSON.stringify(json));
+});
+
+// setup the logger
+app.use(morgan('dev', {}));
+
+app.use('/assets', express.static(path.resolve(__dirname, '../public/assets')));
+app.use(favicon(path.join(__dirname, '../public/static/images/favicon', 'favicon.ico')));
+
+app.use((req, res) => {
+
+    if (process.env.NODE_ENV === 'development') {
+        webpackIsomorphicTools.refresh();
+    }
+
+    const client = new ApiClient();
+    const memoryHistory = createHistory(req.originalUrl);
+    const store = createStore(client, memoryHistory);
+    const history = syncHistoryWithStore(memoryHistory, store);
+
+    match({
+        history,
+        routes: getRoutes(store),
+        location: req.originalUrl
+    }, (error, redirectLocation, renderProps) => {
+
+        if (redirectLocation) {
+            res.redirect(redirectLocation.pathname + redirectLocation.search);
+        } else if (error) {
+            console.error('ROUTER ERROR:', pretty.render(error));
+            res.status(500);
+            hydrateOnClient({ store, res });
+        } else if (renderProps) {
+            global.navigator = { userAgent: req.headers['user-agent'] };
+            renderPage({ renderProps, store, res, client });
+        } else {
+            res.status(404).send('Not found');
+        }
+    });
 });
 
 function hydrateOnClient({ store, res }) {
@@ -92,43 +128,6 @@ function renderPage({ renderProps, store, res, client }) {
       console.error(err.stack);
     });
 }
-
-// setup the logger
-app.use(morgan('dev', {}));
-
-app.use('/', express.static(path.resolve(__dirname, '../public')));
-
-app.use((req, res) => {
-
-    if (process.env.NODE_ENV === 'development') {
-        webpackIsomorphicTools.refresh();
-    }
-
-    const client = new ApiClient();
-    const memoryHistory = createHistory(req.originalUrl);
-    const store = createStore(client, memoryHistory);
-    const history = syncHistoryWithStore(memoryHistory, store);
-
-    match({
-        history,
-        routes: getRoutes(store),
-        location: req.originalUrl
-    }, (error, redirectLocation, renderProps) => {
-
-        if (redirectLocation) {
-            res.redirect(redirectLocation.pathname + redirectLocation.search);
-        } else if (error) {
-            console.error('ROUTER ERROR:', pretty.render(error));
-            res.status(500);
-            hydrateOnClient({ store, res });
-        } else if (renderProps) {
-            global.navigator = { userAgent: req.headers['user-agent'] };
-            renderPage({ renderProps, store, res, client });
-        } else {
-            res.status(404).send('Not found');
-        }
-    });
-});
 
 app.listen(port, (err) => {
     if (err) {

@@ -78,6 +78,7 @@ module.exports = {
   progress: true,
   resolve: {
     modulesDirectories: [
+      '~/',
       'node_modules',
       'src',
     ],

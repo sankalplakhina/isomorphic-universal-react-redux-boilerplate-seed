@@ -1,4 +1,5 @@
 import React from 'react';
+import Component from '~/src/components/common/component/components/component';
 import { app } from './styles/appContainer.less';
 
 class AppContainer extends React.Component {
@@ -6,6 +7,7 @@ class AppContainer extends React.Component {
     return (
     	<div className={app}>
     		{this.props.children}
+    		<Component />
     	</div>
     );
   }
