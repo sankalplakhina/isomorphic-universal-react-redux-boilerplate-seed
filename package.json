@@ -4,16 +4,51 @@
   "description": "",
   "main": "./bin/server.js",
   "scripts": {
+    "dev": "concurrently --kill-others \"better-npm-run dev-server\" \"better-npm-run dev-api\" \"better-npm-run webpack-dev-server\"",
+    "dev-api": "better-npm-run dev-api",
+    "dev-server": "better-npm-run dev-server",
+    "webpack-dev-server": "better-npm-run webpack-dev-server",
+    "start-api": "better-npm-run start-api",
+    "start-server": "better-npm-run start-server",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "postinstall": "npm run build",
-    "dev": "concurrently --kill-others \"npm run dev-server\" \"npm run dev-api\" \"npm run webpack-dev-server\"",
-    "dev-api": "set NODE_ENV=development && nodemon --exec node ./bin/api.js",
-    "dev-server": "set NODE_ENV=development && nodemon --exec node ./bin/server.js",
-    "webpack-dev-server": "set NODE_ENV=development && node ./bin/webpack-dev-server.js",
-    "start": "concurrently --kill-others \"npm run start-server\" \"npm run start-api\"",
-    "start-api": "set NODE_ENV=production && node ./bin/api.js",
-    "start-server": "set NODE_ENV=production && node ./bin/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && concurrently --kill-others \"better-npm-run start-server\" \"better-npm-run start-api\""
+  },
+  "betterScripts":{
+    "dev-server": {
+        "command": "nodemon ./bin/server.js",
+        "env": {
+            "NODE_PATH": "./",
+            "NODE_ENV": "development"
+        }
+    },
+    "dev-api": {
+        "command": "nodemon ./bin/api.js",
+        "env": {
+            "NODE_PATH": "./",
+            "NODE_ENV": "development"
+        }
+    },
+    "webpack-dev-server": {
+        "command": "node ./bin/webpack-dev-server.js",
+        "env": {
+            "NODE_PATH": "./",
+            "NODE_ENV": "development"
+        }
+    },
+    "start-server": {
+        "command": "node ./bin/server.js",
+        "env": {
+            "NODE_PATH": "./",
+            "NODE_ENV": "production"
+        }
+    },
+    "start-api": {
+        "command": "node ./bin/api.js",
+        "env": {
+            "NODE_PATH": "./",
+            "NODE_ENV": "production"
+        }
+    }
   },
   "repository": {
     "type": "git"
@@ -21,6 +56,7 @@
   "author": "Sankalp Lakhina <sankalp.lakhina@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "better-npm-run": "0.0.14",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "concurrently": "^3.1.0",
@@ -51,7 +87,6 @@
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
-    "babel-root-import": "^4.1.5",
     "css-loader": "^0.25.0",
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",

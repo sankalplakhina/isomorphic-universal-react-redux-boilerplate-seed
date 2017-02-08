@@ -4,7 +4,5 @@
     "stage-0",
     "react"
   ],
-  "plugins": [
-  	["babel-root-import"]
-  ]
+  "plugins": []
 }

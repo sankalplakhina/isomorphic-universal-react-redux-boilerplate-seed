@@ -80,9 +80,8 @@ module.exports = {
     progress: true,
     resolve: {
         modulesDirectories: [
-            '~/',
+            './',
             'node_modules',
-            'src',
         ],
         extensions: ['', '.json', '.js', '.jsx'],
     },
