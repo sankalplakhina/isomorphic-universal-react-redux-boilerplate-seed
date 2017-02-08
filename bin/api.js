@@ -1,9 +1,10 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import morgan from 'morgan';
+require('./../server.babel'); // babel registration (runtime transpilation for node)
+const express = require('express');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const morgan = require('morgan');
 
-import { apiPort } from '../config/env';
+const { apiPort } = require('../config/env');
 
 const app = express();
 

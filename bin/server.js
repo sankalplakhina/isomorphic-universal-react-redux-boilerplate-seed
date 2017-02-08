@@ -1,5 +1,4 @@
-/* eslint global-require: 0 */
-
+require('./../server.babel'); // babel registration (runtime transpilation for node)
 const path = require('path');
 const webpackIsomorphicToolsConfig = require('../webpack/webpack-isomorphic-tools');
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');

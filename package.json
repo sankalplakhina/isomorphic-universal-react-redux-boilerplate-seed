@@ -4,16 +4,51 @@
   "description": "",
   "main": "./bin/server.js",
   "scripts": {
-    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "postinstall": "npm run build",
-    "dev": "concurrently --kill-others \"npm run dev-server\" \"npm run dev-api\" \"npm run webpack-dev-server\"",
-    "dev-api": "set NODE_ENV=development && nodemon --exec babel-node ./bin/api.js",
-    "dev-server": "set NODE_ENV=development && nodemon --exec babel-node ./bin/server.js",
-    "webpack-dev-server": "set NODE_ENV=development && babel-node ./bin/webpack-dev-server.js",
-    "start": "concurrently --kill-others \"npm run start-server\" \"npm run start-api\"",
-    "start-api": "set NODE_ENV=production && babel-node ./bin/api.js",
-    "start-server": "set NODE_ENV=production && babel-node ./bin/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently --kill-others \"better-npm-run webpack-dev-server\" \"better-npm-run dev-server\" \"better-npm-run dev-api\"",
+    "dev-api": "better-npm-run dev-api",
+    "dev-server": "better-npm-run dev-server",
+    "webpack-dev-server": "better-npm-run webpack-dev-server",
+    "start-api": "better-npm-run start-api",
+    "start-server": "better-npm-run start-server",
+    "build": "webpack --colors --display-error-details --config webpack/prod.config.js",
+    "start": "npm run build && concurrently --kill-others \"better-npm-run start-server\" \"better-npm-run start-api\""
+  },
+  "betterScripts": {
+    "dev-server": {
+      "command": "nodemon ./bin/server.js",
+      "env": {
+        "NODE_PATH": "./",
+        "NODE_ENV": "development"
+      }
+    },
+    "dev-api": {
+      "command": "nodemon ./bin/api.js",
+      "env": {
+        "NODE_PATH": "./",
+        "NODE_ENV": "development"
+      }
+    },
+    "webpack-dev-server": {
+      "command": "node ./bin/webpack-dev-server.js",
+      "env": {
+        "NODE_PATH": "./",
+        "NODE_ENV": "development"
+      }
+    },
+    "start-server": {
+      "command": "node ./bin/server.js",
+      "env": {
+        "NODE_PATH": "./",
+        "NODE_ENV": "production"
+      }
+    },
+    "start-api": {
+      "command": "node ./bin/api.js",
+      "env": {
+        "NODE_PATH": "./",
+        "NODE_ENV": "production"
+      }
+    }
   },
   "repository": {
     "type": "git"
@@ -21,6 +56,7 @@
   "author": "Sankalp Lakhina <sankalp.lakhina@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "better-npm-run": "0.0.14",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "concurrently": "^3.1.0",
@@ -45,20 +81,21 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
-    "babel-cli": "^6.16.0",
+    "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-lodash": "^3.2.11",
-    "babel-preset-latest": "^6.16.0",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
-    "babel-root-import": "^4.1.5",
+    "babel-runtime": "^6.22.0",
     "css-loader": "^0.25.0",
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.9.0",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
@@ -70,8 +107,8 @@
     "redux-devtools-log-monitor": "^1.0.11",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.2",
-    "webpack-dev-middleware": "^1.8.3",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-hot-middleware": "^2.16.1"
   }
 }

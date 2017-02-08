@@ -5,7 +5,7 @@ import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers/reducers';
 
-function createStore(client, history, data) {
+export function createStore(client, history, data) {
 
   const middleware = [
     thunk.withExtraArgument(client),
@@ -36,7 +36,3 @@ function createStore(client, history, data) {
 
   return store;
 }
-
-module.exports = {
-  createStore,
-};

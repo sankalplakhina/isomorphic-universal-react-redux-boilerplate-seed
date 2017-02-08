@@ -1,9 +1,8 @@
 # isomorphic-universal-react-redux-boilerplate-seed
 
-# Developing
+# Developing?
 * Run `npm install` to install dependencies.
-* Run `npm run dev` to start webpack dev server.
+* Run `npm run dev` to start server, api & webpack.
 
-# Build
-* Run `npm run build` to build assets for production.
-* Run `npm run start` to start the app in production mode.
+# Production?
+* Run `npm run start` to build assets for production & start the app in production mode.

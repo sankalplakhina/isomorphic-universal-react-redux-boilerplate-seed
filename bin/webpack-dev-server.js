@@ -1,7 +1,7 @@
-/* eslint import/no-extraneous-dependencies: 0, no-console: 0 */
-
-import express from 'express';
-import webpack from 'webpack';
+require('./../server.babel'); // babel registration (runtime transpilation for node)
+const express = require('express');
+const compression = require('compression');
+const webpack = require('webpack');
 
 const { host, port, webpackPort } = require('../config/env');
 
@@ -23,6 +23,7 @@ const serverOptions = {
 
 const app = express();
 
+app.use(compression());
 app.use(require('webpack-dev-middleware')(compiler, serverOptions));
 app.use(require('webpack-hot-middleware')(compiler));
 
