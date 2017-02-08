@@ -1,5 +1,5 @@
-const path = require('path');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+import path from 'path';
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 const webpack = require('webpack');
 
 const assetsPath = path.resolve(__dirname, '../public/assets');

@@ -1,5 +1,3 @@
-/* eslint no-underscore-dangle: 0, react/jsx-filename-extension: 0, no-console: 0 */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

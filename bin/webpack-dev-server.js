@@ -1,7 +1,6 @@
-/* eslint import/no-extraneous-dependencies: 0, no-console: 0 */
-
-import express from 'express';
-import webpack from 'webpack';
+require('./../server.babel'); // babel registration (runtime transpilation for node)
+const express = require('express');
+const webpack = require('webpack');
 
 const { host, port, webpackPort } = require('../config/env');
 

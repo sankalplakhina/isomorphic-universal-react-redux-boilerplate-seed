@@ -1,4 +1,3 @@
-/* eslint no-console: 0, react/jsx-filename-extension: 0 */
 import express from 'express';
 import http from 'http';
 import httpProxy from 'http-proxy';

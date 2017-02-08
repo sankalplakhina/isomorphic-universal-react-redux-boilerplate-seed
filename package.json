@@ -7,12 +7,12 @@
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "postinstall": "npm run build",
     "dev": "concurrently --kill-others \"npm run dev-server\" \"npm run dev-api\" \"npm run webpack-dev-server\"",
-    "dev-api": "set NODE_ENV=development && nodemon --exec babel-node ./bin/api.js",
-    "dev-server": "set NODE_ENV=development && nodemon --exec babel-node ./bin/server.js",
-    "webpack-dev-server": "set NODE_ENV=development && babel-node ./bin/webpack-dev-server.js",
+    "dev-api": "set NODE_ENV=development && nodemon --exec node ./bin/api.js",
+    "dev-server": "set NODE_ENV=development && nodemon --exec node ./bin/server.js",
+    "webpack-dev-server": "set NODE_ENV=development && node ./bin/webpack-dev-server.js",
     "start": "concurrently --kill-others \"npm run start-server\" \"npm run start-api\"",
-    "start-api": "set NODE_ENV=production && babel-node ./bin/api.js",
-    "start-server": "set NODE_ENV=production && babel-node ./bin/server.js",
+    "start-api": "set NODE_ENV=production && node ./bin/api.js",
+    "start-server": "set NODE_ENV=production && node ./bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
-    "babel-cli": "^6.16.0",
+    "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-lodash": "^3.2.11",
     "babel-preset-latest": "^6.16.0",
