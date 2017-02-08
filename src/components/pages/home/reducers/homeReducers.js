@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as ACTIONS from '../actions/homeActionTypes';
 
 const initialState = {

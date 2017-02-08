@@ -1,6 +1,5 @@
-/* eslint import/no-extraneous-dependencies: 0 */
-
 const path = require('path');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const webpack = require('webpack');
 
 const assetsPath = path.resolve(__dirname, '../public/assets');
@@ -34,7 +33,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
+        loader: 'babel-loader',
+        query: {
+          plugins: ['lodash'],
+        },
       },
       {
         test: /\.less$/,
@@ -85,7 +87,13 @@ module.exports = {
   plugins: [
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
+    // for file created by WebpackIsomorphicToolsPlugin
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
+    // for optimized loading of lodash modules
+    new LodashModuleReplacementPlugin({
+      // collections: true,
+      // shorthands: true
+    }),
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __DEVTOOLS__: reduxDevTools,
