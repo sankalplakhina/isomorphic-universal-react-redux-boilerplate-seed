@@ -4,7 +4,7 @@
   "description": "",
   "main": "./bin/server.js",
   "scripts": {
-    "dev": "concurrently --kill-others \"better-npm-run dev-server\" \"better-npm-run dev-api\" \"better-npm-run webpack-dev-server\"",
+    "dev": "concurrently --kill-others \"better-npm-run webpack-dev-server\" \"better-npm-run dev-server\" \"better-npm-run dev-api\"",
     "dev-api": "better-npm-run dev-api",
     "dev-server": "better-npm-run dev-server",
     "webpack-dev-server": "better-npm-run webpack-dev-server",

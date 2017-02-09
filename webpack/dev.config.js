@@ -33,7 +33,6 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     cacheDirectory: true,
-                    // cacheIdentifier: babelCacheIdentifier,
                     sourceMap: false, // disable babel sourcemaps so we see the transpiled code when debugging
                 },
                 query: {
@@ -78,7 +77,7 @@ module.exports = {
         return [autoprefixer];
     },
     progress: true,
-        resolve: {
+    resolve: {
         modulesDirectories: [
           './',
           'node_modules',

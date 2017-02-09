@@ -35,7 +35,6 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     cacheDirectory: true,
-                    // cacheIdentifier: babelCacheIdentifier,
                     sourceMap: false, // disable babel sourcemaps so we see the transpiled code when debugging
                 },
                 query: {
