@@ -11,6 +11,9 @@ const webpackIsomorphicTools = new WebpackIsomorphicToolsPlugin(webpackIsomorphi
 
 module.exports = {
     devtool: 'inline-source-map', // use 'cheap-inline-source-map' for faster performance
+    performance: {
+            hints: false,
+    },
     context: path.resolve(__dirname, '..'),
     entry: {
         main: [
