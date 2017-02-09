@@ -11,7 +11,7 @@ import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 const webpackIsomorphicTools = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig);
 
 module.exports = {
-    devtool: 'inline-source-map',
+    devtool: 'inline-source-map', // use 'cheap-inline-source-map' for faster performance
     context: path.resolve(__dirname, '..'),
     entry: {
         main: [
@@ -31,6 +31,11 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
+                options: {
+                    cacheDirectory: true,
+                    // cacheIdentifier: babelCacheIdentifier,
+                    sourceMap: false, // disable babel sourcemaps so we see the transpiled code when debugging
+                },
                 query: {
                     plugins: ['lodash'],
                 },
