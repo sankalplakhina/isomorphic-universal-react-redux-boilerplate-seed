@@ -1,7 +1,6 @@
 require('./../server.babel'); // babel registration (runtime transpilation for node)
 
 const path = require('path');
-const autoprefixer = require('autoprefixer');
 
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -32,65 +31,119 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
-                options: {
-                    cacheDirectory: true,
-                    sourceMap: false, // disable babel sourcemaps so we see the transpiled code when debugging
-                },
-                query: {
-                    plugins: ['lodash'],
-                },
+                use: [{
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        sourceMap: false, // disable babel sourcemaps to see the transpiled code when debugging
+                        plugins: ['lodash'],
+                    }
+                }],
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2&sourceMap!less-loader')
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader",
+                            options: {
+                                importLoaders: 2,
+                                sourceMap: true,
+                            },
+                        },
+                        "less-loader"
+                    ],
+                }),
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract(
-                    'style',
-                    'css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss'
-                ),
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [{
+                        loader: "css-loader",
+                        options: {
+                            modules: true,
+                            importLoaders: 2,
+                            sourceMap: true,
+                            localIdentName: "[local]___[hash:base64:5]",
+                        },
+                    }],
+                    // 'css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss'
+                }),
             },
-            {
+                        {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/font-woff",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=application/font-woff',
             },
             {
                 test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/font-woff",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=application/font-woff',
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/octet-stream',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/octet-stream",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=application/octet-stream',
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file',
+                use: ["file-loader"],
+                // loader: 'file',
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "image/svg+xml",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=image/svg+xml',
             },
             {
                 test: webpackIsomorphicTools.regular_expression('images'),
-                loader: 'url-loader?limit=10240',
-            },
-        ],
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10240,
+                    },
+                },
+                // loader: 'url-loader?limit=10240',
+            },        ],
     },
-    postcss() {
-        return [autoprefixer];
-    },
-    progress: true,
     resolve: {
-        modulesDirectories: [
+        modules: [
             './',
             'node_modules',
         ],
-        extensions: ['', '.json', '.js', '.jsx'],
+        extensions: ['.json', '.js', '.jsx'],
     },
     plugins: [
-        new ExtractTextPlugin('[name]-[chunkhash].css', { allChunks: true }),
+        new ExtractTextPlugin({
+            filename: "[name]-[chunkhash].css",
+            allChunks: true
+        }),
 
         new webpack.DefinePlugin({
             'process.env': {
@@ -107,8 +160,6 @@ module.exports = {
         // ignore dev config
         new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
         // optimizations
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,

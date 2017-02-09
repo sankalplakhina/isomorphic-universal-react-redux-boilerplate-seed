@@ -1,5 +1,4 @@
 import path from 'path';
-import autoprefixer from 'autoprefixer';
 
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 
@@ -26,63 +25,117 @@ module.exports = {
         publicPath: `http://${webpackHost}:${webpackPort}/assets/`,
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
-                options: {
-                    cacheDirectory: true,
-                    sourceMap: false, // disable babel sourcemaps so we see the transpiled code when debugging
-                },
-                query: {
-                    plugins: ['lodash'],
-                },
+                use: [{
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        sourceMap: false, // disable babel sourcemaps to see the transpiled code when debugging
+                        plugins: ['lodash'],
+                    }
+                }],
             },
             {
                 test: /\.less$/,
-                loader: 'style!css?importLoaders=2&sourceMap&localIdentName=[local]__[hash:base64:5]!less-loader'
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 2,
+                            sourceMap: true,
+                            localIdentName: "[local]__[hash:base64:5]",
+                        },
+                    },
+                    "less-loader"
+                ],
+                // loader: 'style!css?importLoaders=2&sourceMap&localIdentName=[local]__[hash:base64:5]!less-loader'
             },
             {
                 test: /\.css$/,
-                loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss',
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 2,
+                            sourceMap: true,
+                            localIdentName: "[local]__[hash:base64:5]",
+                        },
+                    },
+                ],
+                // loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss',
             },
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/font-woff",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=application/font-woff',
             },
             {
                 test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/font-woff",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=application/font-woff',
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/octet-stream',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/octet-stream",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=application/octet-stream',
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file',
+                use: ["file-loader"],
+                // loader: 'file',
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "image/svg+xml",
+                    },
+                },
+                // loader: 'url?limit=10000&mimetype=image/svg+xml',
             },
             {
                 test: webpackIsomorphicTools.regular_expression('images'),
-                loader: 'url-loader?limit=10240',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10240,
+                    },
+                },
+                // loader: 'url-loader?limit=10240',
             },
         ],
     },
-    postcss() {
-        return [autoprefixer];
-    },
-    progress: true,
     resolve: {
-        modulesDirectories: [
+        modules: [
           './',
           'node_modules',
         ],
-        extensions: ['', '.json', '.js', '.jsx'],
+        extensions: ['.json', '.js', '.jsx'],
     },
     plugins: [
         // hot reload

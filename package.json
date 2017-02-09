@@ -10,7 +10,7 @@
     "webpack-dev-server": "better-npm-run webpack-dev-server",
     "start-api": "better-npm-run start-api",
     "start-server": "better-npm-run start-server",
-    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "build": "webpack --colors --display-error-details --config webpack/prod.config.js",
     "start": "npm run build && concurrently --kill-others \"better-npm-run start-server\" \"better-npm-run start-api\""
   },
   "betterScripts": {
@@ -95,7 +95,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.9.0",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
@@ -107,8 +107,8 @@
     "redux-devtools-log-monitor": "^1.0.11",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.2",
-    "webpack-dev-middleware": "^1.8.3",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-hot-middleware": "^2.16.1"
   }
 }
