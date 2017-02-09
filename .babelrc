@@ -1,9 +1,7 @@
 {
   "presets": [
-    ["latest", {
-    	"es2015": true,
-    	"es2016": false,
-    	"es2017": false,
+    ["es2015", {
+    	"loose": true,
     	"modules": false
     }],
     ["stage-0"],
