@@ -25,7 +25,6 @@ class Html extends React.Component {
                     {head.title.toComponent()}
                     {head.meta.toComponent()}
                     {
-                        /* production styles */
                         Object.keys(assets.styles).map((style, key) =>
                             <link href={assets.styles[style]}
                                   key={key}
@@ -34,12 +33,6 @@ class Html extends React.Component {
                                   type="text/css"
                                   charSet="UTF-8" />
                         )
-                    }
-                    {
-                        /* development styles */
-                        Object.keys(assets.styles).length === 0 ?
-                        <style dangerouslySetInnerHTML={{ __html: require('../appContainer/styles/appContainer.less')._style }} />
-                        : null
                     }
                 </head>
                 <body>

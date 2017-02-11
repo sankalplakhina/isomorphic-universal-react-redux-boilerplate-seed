@@ -87,7 +87,7 @@
     "webpack-isomorphic-tools": "^2.5.8"
   },
   "devDependencies": {
-    "autoprefixer": "^6.5.0",
+    "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-lodash": "^3.2.11",
@@ -108,7 +108,7 @@
     "less-loader": "^2.2.3",
     "lodash-webpack-plugin": "^0.11.0",
     "nodemon": "^1.10.2",
-    "postcss-loader": "^0.13.0",
+    "postcss-loader": "^1.2.2",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",

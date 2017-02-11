@@ -13,14 +13,14 @@ const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicTools = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig);
 
 module.exports = {
-    devtool: 'source-map',
     performance: {
         hints: false,
     },
     context: path.resolve(__dirname, '..'),
     entry: {
         main: [
-            './src/client.js',
+            './src/less/styles.less', // entry point for styles
+            './src/client.js',  // entry point for js
         ],
     },
     output: {
@@ -44,38 +44,65 @@ module.exports = {
                 }],
             },
             {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
                     use: [
                         {
-                            loader: "css-loader",
+                            loader: 'css-loader',
                             options: {
-                                importLoaders: 2,
-                                sourceMap: true,
-                            },
+                                sourceMap: false,
+                                importLoaders: 1
+                            }
                         },
-                        "less-loader"
-                    ],
-                }),
+                        {
+                          loader: "postcss-loader",
+                          options: {
+                            sourceMap: false,
+                            plugins: function () {
+                              return [
+                                require('autoprefixer')
+                              ];
+                            },
+                          }
+                        }
+                    ]
+                })
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: [{
-                        loader: "css-loader",
-                        options: {
-                            modules: true,
-                            importLoaders: 2,
-                            sourceMap: true,
-                            localIdentName: "[local]___[hash:base64:5]",
-                        },
-                    }],
-                    // 'css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss'
-                }),
-            },
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
                         {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: false,
+                                minimize: true,
+                                importLoaders: 2
+                            }
+                        },
+                        {
+                          loader: "postcss-loader",
+                          options: {
+                            sourceMap: false,
+                            plugins: function () {
+                              return [
+                                require('autoprefixer')
+                              ];
+                            },
+                          }
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                sourceMap: false,
+                            }
+                        }
+                    ]
+                })
+            },
+            {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
                 use: {
                     loader: "url-loader",
@@ -110,8 +137,13 @@ module.exports = {
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                use: ["file-loader"],
-                // loader: 'file',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/vnd.ms-fontobject",
+                    },
+                },
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
@@ -122,7 +154,10 @@ module.exports = {
                         mimetype: "image/svg+xml",
                     },
                 },
-                // loader: 'url?limit=10000&mimetype=image/svg+xml',
+            },
+            {
+                test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+                use: ["file-loader"],
             },
             {
                 test: webpackIsomorphicTools.regular_expression('images'),
