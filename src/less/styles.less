@@ -1,3 +1,12 @@
+// The less-loader stubs less' fileLoader and passes all queries to the webpack resolving engine.
+// Thus you can import your less-modules from node_modules.
+// Just prepend them with a ~ which tells webpack to look-up the modules
+// @import "~bootstrap/less/bootstrap";
+// It's important to only prepend it with ~, because ~/ resolves to the home-directory.
+// webpack needs to distinguish between bootstrap and ~bootstrap
+// because css- and less-files have no special syntax for importing relative files.
+// Writing @import "file" is the same as @import "./file";
+
 // Include base less/css(like normalize) or maybe framework
 // setups like bootstrap below to use them in project
 // @import 'bootstrap/bootstrap';
