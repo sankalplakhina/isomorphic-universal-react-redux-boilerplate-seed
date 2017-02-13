@@ -14,16 +14,16 @@ module.exports = {
     performance: {
             hints: false,
     },
-    context: path.resolve(__dirname, '..'),
+    context: path.resolve('./'),
     entry: {
         main: [
             `webpack-hot-middleware/client?path=http://${webpackHost}:${webpackPort}/__webpack_hmr`,
-            './src/less/styles.less', // entry point for styles
-            './src/client.js',  // entry point for js
+            'src/less/styles.less', // entry point for styles
+            'src/js/client.js',  // entry point for js
         ],
     },
     output: {
-        path: path.resolve(__dirname, '../public/assets'),
+        path: path.resolve('public/assets'),
         filename: '[name]-[hash].js',
         chunkFilename: '[name]-[chunkhash].js',
         publicPath: `http://${webpackHost}:${webpackPort}/assets/`,

@@ -1,5 +1,5 @@
 import React from 'react';
-import Component from 'src/components/common/component/components/component';
+import Component from 'src/js/components/common/component/components/component';
 
 class AppContainer extends React.Component {
   render() {

@@ -1,11 +1,11 @@
-require('./../server.babel'); // babel registration (runtime transpilation for node)
+require('server.babel'); // babel registration (runtime transpilation for node)
 
 const path = require('path');
 
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const { webpackHost, webpackPort, reduxDevTools } = require('../config/env');
+const { webpackHost, webpackPort, reduxDevTools } = require('config/env');
 const webpack = require('webpack');
 const webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -16,15 +16,15 @@ module.exports = {
     performance: {
         hints: false,
     },
-    context: path.resolve(__dirname, '..'),
+    context: path.resolve('./'),
     entry: {
         main: [
-            './src/less/styles.less', // entry point for styles
-            './src/client.js',  // entry point for js
+            'src/less/styles.less', // entry point for styles
+            'src/js/client.js',  // entry point for js
         ],
     },
     output: {
-        path: path.resolve(__dirname, '../public/assets'),
+        path: path.resolve('public/assets'),
         filename: '[name]-[hash].js',
         chunkFilename: '[name]-[chunkhash].js',
         publicPath: '/assets/',

@@ -52,7 +52,8 @@
     "build": {
       "command": "webpack --colors --display-error-details --config webpack/prod.config.js",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "NODE_PATH": "./"
       }
     }
   },

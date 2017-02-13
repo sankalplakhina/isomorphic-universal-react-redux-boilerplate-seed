@@ -14,12 +14,12 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 
-import { createStore } from '../src/store/createStore';
-import ApiClient from '../src/helpers/ApiClient';
+import { createStore } from './store/createStore';
+import ApiClient from './helpers/ApiClient';
 
-import getRoutes from '../src/routes';
-import Html from '../src/components/html/html';
-import { port, apiHost, apiPort } from '../config/env';
+import getRoutes from './routes';
+import Html from './components/html/html';
+import { port, apiHost, apiPort } from 'config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;
 const pretty = new PrettyError();
@@ -58,8 +58,8 @@ proxy.on('error', (error, req, res) => {
 // setup the logger
 app.use(morgan('dev', {}));
 
-app.use('/assets', express.static(path.resolve(__dirname, '../public/assets')));
-app.use(favicon(path.join(__dirname, '../public/static', 'favicon.ico')));
+app.use('/assets', express.static(path.resolve('public/assets')));
+app.use(favicon(path.join('public/static', 'favicon.ico')));
 
 app.use((req, res) => {
 

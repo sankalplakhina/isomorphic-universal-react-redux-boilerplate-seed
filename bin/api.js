@@ -1,10 +1,12 @@
-require('./../server.babel'); // babel registration (runtime transpilation for node)
+// Root directory(NODE_PATH) for this server is defined in package.json
+// "NODE_PATH": "./" from root folder
+require('server.babel'); // babel registration (runtime transpilation for node)
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const morgan = require('morgan');
 
-const { apiPort } = require('../config/env');
+const { apiPort } = require('config/env');
 
 const app = express();
 
