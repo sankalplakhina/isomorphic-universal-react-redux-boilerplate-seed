@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Root directory(NODE_PATH) for this server is defined in package.json
 // "NODE_PATH": "./" from root folder
 require('server.babel'); // babel registration (runtime transpilation for node)
@@ -26,7 +27,9 @@ const serverOptions = {
 const app = express();
 
 app.use(compression());
+// eslint-disable-next-line import/no-extraneous-dependencies
 app.use(require('webpack-dev-middleware')(compiler, serverOptions));
+// eslint-disable-next-line import/no-extraneous-dependencies
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.listen(webpackPort, (err) => {

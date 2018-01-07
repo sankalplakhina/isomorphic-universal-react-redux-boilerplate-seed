@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Root directory(NODE_PATH) for this server is defined in package.json
 // "NODE_PATH": "./" from root folder
 require('server.babel'); // babel registration (runtime transpilation for node)
@@ -15,22 +16,22 @@ app.use(compression());
 app.use(bodyParser.json());
 
 app.get('/api/home', (req, res) => {
-	res.json({
-		status: '200',
-		data: {
-			message: 'Home',
-		}
-	});
+  res.json({
+    status: '200',
+    data: {
+      message: 'Home',
+    },
+  });
 });
 
 app.get('/api', (req, res) => {
-	res.json({message: 'Welcome to the API!'});
+  res.json({ message: 'Welcome to the API!' });
 });
 
 app.listen(apiPort, (err) => {
-	if (err) {
-		console.error(err);
-	} else {
-		console.info(`API is up on port ${apiPort}`);
-	}
+  if (err) {
+    console.error(err);
+  } else {
+    console.info(`API is up on port ${apiPort}`);
+  }
 });

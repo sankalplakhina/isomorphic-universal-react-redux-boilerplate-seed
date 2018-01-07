@@ -9,4 +9,3 @@ export const webpackPort = 3002;
 // general configs
 export const reduxDevTools = false;
 
-

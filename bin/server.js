@@ -9,5 +9,6 @@ const rootDir = path.resolve(__dirname, '..');
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfig)
   .server(rootDir, () => {
+    // eslint-disable-next-line global-require
     require('src/js/server');
   });
