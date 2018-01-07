@@ -1,11 +1,11 @@
 import { apiHost, port } from 'config/env';
-
 import fetch from 'isomorphic-fetch';
+
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
-  const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  return 'http://' + apiHost + ':' + port + adjustedPath;
+  const adjustedPath = path[0] !== '/' ? `/${path}` : path;
+  return `http://${apiHost}:${port}${adjustedPath}`;
 }
 
 function checkStatus(response) {
@@ -53,6 +53,6 @@ export default class ApiClient {
    *
    * Remove it at your own risk.
    */
-  empty() {
+  static empty() {
   }
 }

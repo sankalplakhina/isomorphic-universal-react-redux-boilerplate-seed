@@ -1,7 +1,3 @@
-export const homeDataSelector = (state) => {
-  return state.home.data || {};
-};
+export const homeDataSelector = state => state.home.data || {};
 
-export const homeMessageSelector = (state) => {
-  return homeDataSelector(state).message || "";
-};
+export const homeMessageSelector = state => homeDataSelector(state).message || '';

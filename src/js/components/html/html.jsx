@@ -37,7 +37,7 @@ class Html extends React.Component {
                 </head>
                 <body>
                     <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
-                    <script dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }}
+                    <script dangerouslySetInnerHTML={{ __html: `window.serverData=${serialize(store.getState())};` }}
                             charSet="UTF-8" />
                     {
                         Object.keys(assets.javascript).map((key, index) =>

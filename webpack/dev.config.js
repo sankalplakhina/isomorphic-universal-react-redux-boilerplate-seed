@@ -19,7 +19,7 @@ module.exports = {
         main: [
             `webpack-hot-middleware/client?path=http://${webpackHost}:${webpackPort}/__webpack_hmr`,
             'src/less/styles.less', // entry point for styles
-            'src/js/client.js',  // entry point for js
+            'src/js/client.jsx',  // entry point for js
         ],
     },
     output: {

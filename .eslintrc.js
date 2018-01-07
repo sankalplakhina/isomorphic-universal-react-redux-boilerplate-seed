@@ -1,8 +1,16 @@
 module.exports = {
-  extends: 'airbnb',
+	extends: 'airbnb',
 
-  globals: {
-    __CLIENT__: true,
-    __DEVTOOLS__: true,
-  },
+	"settings": {
+		"import/resolver": {
+			"webpack": {
+				"config": "./webpack/prod.config"
+			}
+		}
+	},
+
+	globals: {
+		__CLIENT__: true,
+		__DEVTOOLS__: true,
+	},
 };

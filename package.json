@@ -11,7 +11,7 @@
     "start-api": "better-npm-run start-api",
     "start-server": "better-npm-run start-server",
     "build": "better-npm-run build",
-    "eslint": "better-npm-run eslint",
+    "eslint-fix": "better-npm-run eslint-fix",
     "start": "npm run build && concurrently --kill-others \"better-npm-run start-server\" \"better-npm-run start-api\""
   },
   "betterScripts": {
@@ -57,8 +57,8 @@
         "NODE_PATH": "./"
       }
     },
-    "eslint": {
-      "command": "./node_modules/.bin/eslint ./src",
+    "eslint-fix": {
+      "command": "./node_modules/.bin/eslint ./src --fix",
       "env": {
         "NODE_PATH": "./"
       }
@@ -115,6 +115,7 @@
     "autoprefixer": "^6.7.2",
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",
+    "eslint-import-resolver-webpack": "^0.8.4",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",

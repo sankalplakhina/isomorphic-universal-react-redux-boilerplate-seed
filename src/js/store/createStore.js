@@ -5,11 +5,10 @@ import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import reducers from '../reducers/reducers';
 
-export function createStore(client, history, data) {
-
+export default function createStore(client, history, data) {
   const middleware = [
     thunk.withExtraArgument(client),
-    routerMiddleware(history)
+    routerMiddleware(history),
   ];
 
   let finalCreateStore;
@@ -19,7 +18,7 @@ export function createStore(client, history, data) {
 
     finalCreateStore = compose(
       applyMiddleware(...middleware),
-      global.devToolsExtension? global.devToolsExtension() : DevTools.instrument(),
+      global.devToolsExtension ? global.devToolsExtension() : DevTools.instrument(),
       persistState(global.location.href.match(/[?&]debug_session=([^&]+)\b/))
     )(_createStore);
   } else {
