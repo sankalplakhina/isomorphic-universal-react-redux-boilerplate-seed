@@ -58,7 +58,7 @@
       }
     },
     "eslint-fix": {
-      "command": "./node_modules/.bin/eslint ./ --fix",
+      "command": "./node_modules/.bin/eslint --fix --ext .js --ext .jsx ./",
       "env": {
         "NODE_PATH": "./"
       }

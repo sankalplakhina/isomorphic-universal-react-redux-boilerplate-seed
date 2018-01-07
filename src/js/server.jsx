@@ -70,7 +70,7 @@ const hydrateOnClient = ({ store, res }) => {
           />
         )}`
     );
-}
+};
 
 const renderPage = ({ renderProps, store, res, client }) => {
   loadOnServer({ ...renderProps, store, helpers: { client } })
@@ -94,7 +94,7 @@ const renderPage = ({ renderProps, store, res, client }) => {
     .catch((err) => {
       console.error(err.stack);
     });
-}
+};
 
 app.use((req, res) => {
   if (process.env.NODE_ENV === 'development') {
@@ -125,7 +125,6 @@ app.use((req, res) => {
     }
   });
 });
-
 
 
 app.listen(port, (err) => {

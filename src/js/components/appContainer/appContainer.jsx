@@ -1,17 +1,13 @@
 import React from 'react';
 
-class AppContainer extends React.Component {
-  render() {
-    return (
-    	<div>
-    		{this.props.children}
-    	</div>
+const AppContainer = ({ children }) => (
+  <div>
+    {children}
+  </div>
     );
-  }
-}
 
 AppContainer.propTypes = {
-  children: React.PropTypes.any,
+  children: React.PropTypes.object,
 };
 
 export default AppContainer;

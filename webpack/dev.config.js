@@ -35,14 +35,17 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-            sourceMap: false, // disable babel sourcemaps to see the transpiled code when debugging
-            plugins: ['lodash'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              // disable babel sourcemaps to see the transpiled code when debugging
+              sourceMap: false,
+              plugins: ['lodash'],
+            },
           },
-        }],
+        ],
       },
       {
         test: /\.css$/,

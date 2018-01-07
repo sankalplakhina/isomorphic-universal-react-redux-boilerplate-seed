@@ -17,14 +17,14 @@ const component = (
   <Router
     history={history}
     render={
-      (props) =>
+      props =>
         <ReduxAsyncConnect
           {...props}
           helpers={{ client }}
           filter={item => !item.deferred}
         />
       }
-    >
+  >
     {getRoutes(store)}
   </Router>
 );
@@ -46,6 +46,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (__DEVTOOLS__ && !global.devToolsExtension) {
+  // eslint-disable-next-line global-require
   const DevTools = require('./components/devTools');
 
   ReactDOM.render(

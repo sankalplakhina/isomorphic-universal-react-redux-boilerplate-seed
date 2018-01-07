@@ -13,4 +13,8 @@ module.exports = {
 		__CLIENT__: true,
 		__DEVTOOLS__: true,
 	},
+
+	rules: {
+		"react/forbid-prop-types": "off",
+	},
 };
