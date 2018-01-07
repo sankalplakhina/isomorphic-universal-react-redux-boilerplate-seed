@@ -11,6 +11,7 @@
     "start-api": "better-npm-run start-api",
     "start-server": "better-npm-run start-server",
     "build": "better-npm-run build",
+    "eslint": "better-npm-run eslint",
     "start": "npm run build && concurrently --kill-others \"better-npm-run start-server\" \"better-npm-run start-api\""
   },
   "betterScripts": {
@@ -53,6 +54,12 @@
       "command": "./node_modules/.bin/webpack --colors --display-error-details --config webpack/prod.config.js",
       "env": {
         "NODE_ENV": "production",
+        "NODE_PATH": "./"
+      }
+    },
+    "eslint": {
+      "command": "./node_modules/.bin/eslint ./src",
+      "env": {
         "NODE_PATH": "./"
       }
     }
