@@ -5,8 +5,7 @@ import Home from './components/pages/home/containers/home';
 import About from './components/pages/about/containers/about';
 import NotFound from './components/pages/notFound/components/notFound';
 
-export default () =>
-
+export default () => (
   // TODO:  Following approach to be used in case we need
   // to handle routes requiring login
 
@@ -27,11 +26,10 @@ export default () =>
   //   }
   // };
 
-     (
-       <Route path="/" component={AppContainer}>
-         <IndexRoute component={Home} />
-         <Route path="home" component={Home} />
-         <Route path="about" component={About} />
-         <Route path="*" component={NotFound} status={404} />
-       </Route>
-    );
+  <Route path="/" component={AppContainer}>
+    <IndexRoute component={Home} />
+    <Route path="home" component={Home} />
+    <Route path="about" component={About} />
+    <Route path="*" component={NotFound} status={404} />
+  </Route>
+);

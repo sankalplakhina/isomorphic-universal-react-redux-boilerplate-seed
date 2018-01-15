@@ -16,14 +16,13 @@ const history = syncHistoryWithStore(browserHistory, store);
 const component = (
   <Router
     history={history}
-    render={
-      props =>
-        <ReduxAsyncConnect
-          {...props}
-          helpers={{ client }}
-          filter={item => !item.deferred}
-        />
-      }
+    render={props => (
+      <ReduxAsyncConnect
+        {...props}
+        helpers={{ client }}
+        filter={item => !item.deferred}
+      />
+    )}
   >
     {getRoutes(store)}
   </Router>
@@ -39,9 +38,16 @@ ReactDOM.render(
 if (process.env.NODE_ENV !== 'production') {
   global.React = React; // enable debugger
 
-  if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
+  if (
+    !dest ||
+    !dest.firstChild ||
+    !dest.firstChild.attributes ||
+    !dest.firstChild.attributes['data-react-checksum']
+  ) {
     // eslint-disable-next-line no-console
-    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+    console.error(
+      'Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.'
+    );
   }
 }
 

@@ -8,7 +8,7 @@ const Home = props => (
     {props.message}
     <Link to="/about">Go to About</Link>
   </div>
-    );
+);
 
 Home.propTypes = {
   message: React.PropTypes.string,

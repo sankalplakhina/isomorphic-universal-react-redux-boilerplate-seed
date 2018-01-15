@@ -23,4 +23,6 @@ function mapDispatchToProps() {
   return {};
 }
 
-export default asyncConnect([asyncProps], mapStateToProps, mapDispatchToProps)(Home);
+export default asyncConnect([asyncProps], mapStateToProps, mapDispatchToProps)(
+  Home
+);

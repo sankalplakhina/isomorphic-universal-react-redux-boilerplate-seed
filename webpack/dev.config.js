@@ -8,8 +8,9 @@ import autoprefixer from 'autoprefixer';
 import webpackIsomorphicToolsConfig from './webpack-isomorphic-tools';
 import { webpackHost, webpackPort, reduxDevTools } from '../config/env';
 
-
-const webpackIsomorphicTools = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig);
+const webpackIsomorphicTools = new WebpackIsomorphicToolsPlugin(
+  webpackIsomorphicToolsConfig
+);
 
 module.exports = {
   devtool: 'inline-source-map', // use 'cheap-inline-source-map' for faster performance
@@ -21,7 +22,7 @@ module.exports = {
     main: [
       `webpack-hot-middleware/client?path=http://${webpackHost}:${webpackPort}/__webpack_hmr`,
       'src/less/styles.less', // entry point for styles
-      'src/js/client.jsx',  // entry point for js
+      'src/js/client.jsx', // entry point for js
     ],
   },
   output: {
@@ -51,13 +52,15 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [{
-            loader: 'css-loader',
-            options: {
-              sourceMap: false,
-              importLoaders: 1,
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: false,
+                importLoaders: 1,
+              },
             },
-          }],
+          ],
         }),
       },
       {
@@ -77,9 +80,7 @@ module.exports = {
               options: {
                 sourceMap: true,
                 plugins() {
-                  return [
-                    autoprefixer,
-                  ];
+                  return [autoprefixer];
                 },
               },
             },
@@ -158,26 +159,23 @@ module.exports = {
     ],
   },
   resolve: {
-    modules: [
-      './',
-      'node_modules',
-    ],
+    modules: ['./', 'node_modules'],
     extensions: ['.json', '.js', '.jsx'],
   },
   plugins: [
-        // hot reload
+    // hot reload
     new webpack.HotModuleReplacementPlugin(),
-        // extract CSS into separate file
+    // extract CSS into separate file
     new ExtractTextPlugin({
       filename: 'styles.css',
       allChunks: true,
     }),
-        // for file created by WebpackIsomorphicToolsPlugin
+    // for file created by WebpackIsomorphicToolsPlugin
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
-        // for optimized loading of lodash modules
+    // for optimized loading of lodash modules
     new LodashModuleReplacementPlugin({
-            // collections: true,
-            // shorthands: true
+      // collections: true,
+      // shorthands: true
     }),
     new webpack.DefinePlugin({
       __CLIENT__: true,

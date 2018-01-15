@@ -10,7 +10,9 @@ const webpack = require('webpack');
 const webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 
-const webpackIsomorphicTools = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig);
+const webpackIsomorphicTools = new WebpackIsomorphicToolsPlugin(
+    webpackIsomorphicToolsConfig
+);
 
 module.exports = {
   performance: {
@@ -20,7 +22,7 @@ module.exports = {
   entry: {
     main: [
       'src/less/styles.less', // entry point for styles
-      'src/js/client.jsx',  // entry point for js
+      'src/js/client.jsx', // entry point for js
     ],
   },
   output: {
@@ -34,14 +36,17 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-            sourceMap: false, // disable babel sourcemaps to see the transpiled code when debugging
-            plugins: ['lodash'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+                            // disable babel sourcemaps to see the transpiled code when debugging
+              sourceMap: false,
+              plugins: ['lodash'],
+            },
           },
-        }],
+        ],
       },
       {
         test: /\.css$/,
@@ -60,9 +65,7 @@ module.exports = {
               options: {
                 sourceMap: false,
                 plugins() {
-                  return [
-                    autoprefixer,
-                  ];
+                  return [autoprefixer];
                 },
               },
             },
@@ -87,9 +90,7 @@ module.exports = {
               options: {
                 sourceMap: false,
                 plugins() {
-                  return [
-                    autoprefixer,
-                  ];
+                  return [autoprefixer];
                 },
               },
             },
@@ -168,13 +169,11 @@ module.exports = {
           },
         },
                 // loader: 'url-loader?limit=10240',
-      }],
+      },
+    ],
   },
   resolve: {
-    modules: [
-      './',
-      'node_modules',
-    ],
+    modules: ['./', 'node_modules'],
     extensions: ['.json', '.js', '.jsx'],
   },
   plugins: [

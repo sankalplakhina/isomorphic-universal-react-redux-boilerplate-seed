@@ -1,20 +1,20 @@
 module.exports = {
-	extends: 'airbnb',
+  extends: "airbnb",
 
-	"settings": {
-		"import/resolver": {
-			"webpack": {
-				"config": "./webpack/prod.config"
-			}
-		}
-	},
+  settings: {
+    "import/resolver": {
+      webpack: {
+        config: "./webpack/prod.config"
+      }
+    }
+  },
 
-	globals: {
-		__CLIENT__: true,
-		__DEVTOOLS__: true,
-	},
+  globals: {
+    __CLIENT__: true,
+    __DEVTOOLS__: true
+  },
 
-	rules: {
-		"react/forbid-prop-types": "off",
-	},
+  rules: {
+    "react/forbid-prop-types": "off"
+  }
 };

@@ -24,30 +24,28 @@ const Html = (props) => {
         {head.base.toComponent()}
         {head.title.toComponent()}
         {head.meta.toComponent()}
-        {
-                        Object.keys(assets.styles).map((style, key) =>
-                          <link
-                            href={assets.styles[style]}
-                            key={key}
-                            media="screen, projection"
-                            rel="stylesheet"
-                            type="text/css"
-                            charSet="UTF-8"
-                          />
-                        )
-                    }
+        {Object.keys(assets.styles).map((style, key) => (
+          <link
+            href={assets.styles[style]}
+            key={key}
+            media="screen, projection"
+            rel="stylesheet"
+            type="text/css"
+            charSet="UTF-8"
+          />
+        ))}
       </head>
       <body>
         <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
         <script
-          dangerouslySetInnerHTML={{ __html: `window.serverData=${serialize(store.getState())};` }}
+          dangerouslySetInnerHTML={{
+            __html: `window.serverData=${serialize(store.getState())};`,
+          }}
           charSet="UTF-8"
         />
-        {
-                        Object.keys(assets.javascript).map((key, index) =>
-                          <script src={assets.javascript[key]} key={index} charSet="UTF-8" />
-                        )
-                    }
+        {Object.keys(assets.javascript).map((key, index) => (
+          <script src={assets.javascript[key]} key={index} charSet="UTF-8" />
+        ))}
       </body>
     </html>
   );

@@ -62,14 +62,11 @@ app.use('/assets', express.static(path.resolve('public/assets')));
 app.use(favicon(path.join('public/static', 'favicon.ico')));
 
 const hydrateOnClient = ({ store, res }) => {
-  res.send(`<!doctype html>${
-        ReactDOM.renderToStaticMarkup(
-          <Html
-            assets={global.webpackIsomorphicTools.assets()}
-            store={store}
-          />
-        )}`
-    );
+  res.send(
+    `<!doctype html>${ReactDOM.renderToStaticMarkup(
+      <Html assets={global.webpackIsomorphicTools.assets()} store={store} />
+    )}`
+  );
 };
 
 const renderPage = ({ renderProps, store, res, client }) => {
@@ -79,17 +76,17 @@ const renderPage = ({ renderProps, store, res, client }) => {
         <Provider store={store} key="provider">
           <ReduxAsyncConnect {...renderProps} />
         </Provider>
-        );
+      );
       res.status(200);
-      res.send(`<!doctype html>${
-            ReactDOM.renderToStaticMarkup(
-              <Html
-                assets={global.webpackIsomorphicTools.assets()}
-                component={component}
-                store={store}
-              />
-            )}`
-        );
+      res.send(
+        `<!doctype html>${ReactDOM.renderToStaticMarkup(
+          <Html
+            assets={global.webpackIsomorphicTools.assets()}
+            component={component}
+            store={store}
+          />
+        )}`
+      );
     })
     .catch((err) => {
       console.error(err.stack);
@@ -106,26 +103,28 @@ app.use((req, res) => {
   const store = createStore(client, memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
 
-  match({
-    history,
-    routes: getRoutes(store),
-    location: req.originalUrl,
-  }, (error, redirectLocation, renderProps) => {
-    if (redirectLocation) {
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    } else if (error) {
-      console.error('ROUTER ERROR:', pretty.render(error));
-      res.status(500);
-      hydrateOnClient({ store, res });
-    } else if (renderProps) {
-      global.navigator = { userAgent: req.headers['user-agent'] };
-      renderPage({ renderProps, store, res, client });
-    } else {
-      res.status(404).send('Not found');
+  match(
+    {
+      history,
+      routes: getRoutes(store),
+      location: req.originalUrl,
+    },
+    (error, redirectLocation, renderProps) => {
+      if (redirectLocation) {
+        res.redirect(redirectLocation.pathname + redirectLocation.search);
+      } else if (error) {
+        console.error('ROUTER ERROR:', pretty.render(error));
+        res.status(500);
+        hydrateOnClient({ store, res });
+      } else if (renderProps) {
+        global.navigator = { userAgent: req.headers['user-agent'] };
+        renderPage({ renderProps, store, res, client });
+      } else {
+        res.status(404).send('Not found');
+      }
     }
-  });
+  );
 });
-
 
 app.listen(port, (err) => {
   if (err) {
